@@ -1,0 +1,17 @@
+.logo-header{
+    width: 70px;
+  }
+
+  .cor{
+    background-color: #4E905C;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center; /* Alinhamento vertical */
+    justify-content: space-between; /* Espaçamento entre os itens */
+  }
+  
+  ion-back-button {
+    color: black; 
+  }

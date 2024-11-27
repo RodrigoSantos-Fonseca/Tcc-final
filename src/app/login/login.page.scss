@@ -1,0 +1,43 @@
+.fundo{
+    background-color: black;
+    height: 100dvh;
+  }
+    
+    .login-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0% 8% 0% 8%;
+      color: #ECFEBF;
+    }
+    
+    .logo{
+      width: 50%;
+    }
+    
+    .input-login{
+      background-color: #D9D9D9;
+      border-radius: 10px;
+      color: black;
+    }
+    
+    .custom-button{
+      background-color: #D9D9D9;
+      width: 36%;
+      height: 40px;
+      border-radius: 10px;
+      color: black;
+    }
+    
+    
+    .social-logo{
+      width: 40px;
+      margin: 10px;
+    }
+    
+    
+    .logo-row{
+    
+      margin-top: 20px;
+    }
+    

@@ -1,0 +1,148 @@
+<app-header></app-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <div class="titulo-atividade" style="margin: 10px 0px; text-align: center;">
+    <h1>Atividades</h1>
+  </div>
+
+  <ng-container *ngFor="let aula of this.aulaService.aulas" class="main-div">  
+  </ng-container>
+
+  <!-- <ion-button (click)="this.salvar()">Salvar</ion-button> -->
+
+
+  <!-- <div class="container">
+    <div *ngFor="let dataAtividade of atividades" class="main-div">
+      <aside class="side-div">
+        <span>{{ dataAtividade.data | date: 'MMM d'}}</span>
+      </aside>
+      <div class="atividade-container">
+        <div *ngFor="let atividade of dataAtividade.atividades" class="atividade-div">
+          <div class="top-div">
+            <ion-row>
+              <ion-col>
+                <h1>{{ atividade.titulo }}</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="alinhamento">
+                <img style="width: 40px;" src="assets/icon/icon persons.png" alt="">
+                <span>{{ atividade.participantes }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-end">
+                <button
+                  style="background-color: #4E905C; height: 50px; border-radius: 5px; width:auto; padding: 10px; color: black;">
+                  Confirmar Presença
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!-- --------------------------codigofuncional----------------------------- -->
+  <!-- <div class="container">
+    <div *ngFor="let aula of this.aulaService.aulas" class="main-div">
+      <aside class="side-div"> -->
+        <!-- <span>{{ aula.data | date: 'MMM d'}}</span> -->
+        <!-- <span>{{ aula.data}}</span>
+      </aside>
+      <div class="atividade-container">
+        <div *ngFor="let aula of this.aulaService.aulas" class="atividade-div">
+          <div class="top-div">
+            <ion-row>
+              <ion-col>
+                <h1>{{ aula.nome}}</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="alinhamento">
+                <img style="width: 40px;" src="assets/icon/icon persons.png" alt="">
+                <span>{{ aula.qtd }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-end">
+                <button
+                  style="background-color: #4E905C; height: 50px; border-radius: 5px; width:auto; padding: 10px; color: black;">
+                  Confirmar Presença
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+<!-- -------------------------teste abaixo ------------------------------ -->
+
+<!-- app.component.html -->
+
+
+
+  <div class="container" *ngFor="let aula of this.aulaService.aulas">
+    <div class="main-div">
+      <aside class="side-div">
+        <span>{{ aula.data }}</span>
+      </aside>
+      <div class="atividade-container">
+        <div class="atividade-div">
+          <div class="top-div">
+            <ion-row>
+              <ion-col>
+                <h1>{{ aula.nome }}</h1>
+              </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col>
+                <p>Professor: {{ aula.professor }}</p>
+                <p>Horário: {{ aula.hora_inicio }} - {{ aula.hora_fim }}</p>
+                <p>Sala: {{ aula.sala }}</p>
+                <p>Descrição: {{ aula.descricao }}</p>
+              </ion-col>
+            </ion-row> -->
+            <ion-row>
+              <ion-col class="alinhamento">
+                <img style="width: 40px;" src="assets/icon/icon persons.png" alt="">
+                <span>{{ aula.qtd }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-end">
+                <button
+                  style="background-color: #4E905C; height: 50px; border-radius: 5px; width: auto; padding: 10px; color: black;">
+                  Participar
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>
+
+<app-tabs></app-tabs>

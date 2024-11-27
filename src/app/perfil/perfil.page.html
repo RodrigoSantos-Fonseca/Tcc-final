@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto">
+            <ion-avatar>
+              <img src="assets/icon/mario.jpeg" alt="Foto de Perfil">
+            </ion-avatar>
+          </ion-col>
+          <ion-col>
+            <ion-card-title>
+              Mario Bros
+            </ion-card-title>
+            <ion-card-subtitle>
+              ID: 123456
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <ion-item button routerLink="/dados-pessoais">
+      Dados Pessoais
+    </ion-item>
+    <ion-item button routerLink="/alterar-senha">
+      Alterar Senha
+    </ion-item>
+    <ion-item button>
+      Sair do App
+    </ion-item>
+  </ion-list>
+
+
+
+
+</ion-content>
+
+<app-tabs></app-tabs>

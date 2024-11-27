@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+    <div class="login-container">
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <img src="assets/icon/logo.png" alt="" class="logo">
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <h3>Login</h3>
+          <p>Novo por aqui?<a style=" margin-left:1px; text-decoration:none; color:#ECFEBF" routerLink="/cadastrar">Registre-se</a></p>
+        </ion-col>
+      </ion-row>
+  
+      <form #loginForm="ngForm" (ngSubmit)="realizarLogin(loginForm.value)">
+        <ion-row> 
+          <ion-col>
+            <ion-label>E-mail</ion-label>
+            <ion-input ngModel name="email" class="input-login" fill="outline"></ion-input>
+            <br />
+            <ion-label>Senha</ion-label>
+            <ion-input ngModel name="password" type="password" class="input-login" fill="outline"></ion-input>
+            <ion-label>esqueceu a senha?</ion-label>
+            <ion-row class="ion-text-center">
+              <ion-col>
+                <button type="submit" class="custom-button">Login</button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </form>
+  
+      <ion-row class="ion-text-center  logo-row">
+        <ion-col>
+          <img class="social-logo" src="assets/icon/facebook.png" alt="">
+          <!-- <img class="social-logo" (click)="entrarComGoogle()" src="assets/icon/google.png" alt=""> -->
+          <img class="social-logo"  src="assets/icon/google.png" alt="">
+        </ion-col>
+      </ion-row>
+  
+      
+    </div>
+  
+  </div>
+  </ion-content>

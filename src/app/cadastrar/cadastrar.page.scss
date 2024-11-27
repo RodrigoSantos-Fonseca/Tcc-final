@@ -1,0 +1,27 @@
+.container{
+    height: 100dvh;
+    background: url('/assets/icon/logoBlack.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    backdrop-filter: blur(3px);
+    position: relative;
+    overflow: hidden;
+
+}
+
+ion-back-button {
+    color: black; 
+  }
+
+.cor{
+    background-color: #4E905C !important;
+    height:70px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center; /* Alinhamento vertical */
+    justify-content: space-between; /* Espaçamento entre os itens */
+  }
+  
