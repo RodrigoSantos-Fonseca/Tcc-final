@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  user: any;
 
-  ngOnInit() {
+  constructor(private authService: AuthenticateService) { }
+
+  async ngOnInit() {
+    this.user = await this.authService.getUser();
+    console.log('Dados do usuário na página de perfil:', this.user);
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

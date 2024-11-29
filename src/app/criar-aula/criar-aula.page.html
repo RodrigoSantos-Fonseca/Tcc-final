@@ -1,156 +1,50 @@
-<!-- <app-header></app-header>
-
-<ion-content [fullscreen]="true">
-
-
-  <ion-row style="margin-top: 50px;">
-    <ion-col>
-      <ion-label>Nome Aula *</ion-label>
-      <ion-input type="text" class="input" fill="outline" [(ngModel)]="this.aula.nome" required></ion-input>
-      <br />
-      <ion-label>Professor *</ion-label>
-      <ion-input type="text" class="input" fill="outline" [(ngModel)]="this.aula.professor" required></ion-input>
-      <ion-row>
-        <ion-col size="6">
-          <ion-label>Data *</ion-label>
-          <ion-input type="date" class="input" fill="outline" [(ngModel)]="this.aula.data" required></ion-input>
-        </ion-col>
-        <ion-col size="6">
-          <ion-label>Qtd Alunos*</ion-label>
-          <ion-input type="number" class="input" fill="outline" min="0" [(ngModel)]="this.aula.qtd" required></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-label>Hora De Inicio*</ion-label>
-          <ion-input type="time" class="input" fill="outline" [(ngModel)]="this.aula.hora_inicio" required></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-label>Hora De Fim</ion-label>
-          <ion-input type="time" class="input" fill="outline" [(ngModel)]="this.aula.hora_fim" required></ion-input>
-        </ion-col>
-
-      </ion-row>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-      <ion-label>Foco do Treino:</ion-label>
-      <ion-textarea style="height: 250px;" class="input" fill="outline" [(ngModel)]="this.aula.descricao"></ion-textarea>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col class="ion-text-center" style="display: flex; justify-content: center;">
-      <ion-button id="open-modal" expand="block" style="height: 50px; border-radius: 5px; width:50%; padding: 10px; color: black;">
-        Selecionar alunos
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header class="ion-text-center" style="background-color: #4E905C;  margin-top:20px;">
-        <ion-title slot="center">Selecione o(a)s Alunos(as)</ion-title>
-      </ion-header>
-      
-      <ion-content class="ion-padding">
-        <ion-list color="white">
-          <ion-item *ngFor="let aluno of alunos">
-            <ion-label>{{ aluno.nome }}</ion-label>
-            <ion-checkbox [(ngModel)]="aluno.selecionado"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-  
-        <div class="container-button" style="display: flex; justify-content: space-between; margin-top: 20px;">
-          <ion-button (click)="cancel()">Cancelar</ion-button>
-          <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
-        </div>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-
-
-  <ion-row class="ion-text-center">
-    <ion-col>
-      <button (click)="salvar()" class="custom-button">Criar Aula</button>
-    </ion-col>
-  </ion-row>
-
-
-</ion-content>
-
-<app-tabs></app-tabs> -->
-
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
-  <form #form="ngForm" (ngSubmit)="this.aulaService.salvar(form)">
+  <form #form="ngForm" (ngSubmit)="salvarAula(form)">
     <ion-row style="margin-top: 50px;">
       <ion-col>
         <ion-label>Nome Aula *</ion-label>
-        <ion-input type="text" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.nome" name="nome" required></ion-input>
+        <ion-input type="text" class="input" fill="outline" [(ngModel)]="aulaService.aula.nome" name="nome" required></ion-input>
         <br />
         <ion-label>Professor *</ion-label>
-        <ion-input type="text" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.professor" name="professor" required></ion-input>
-        <ion-row>
-          <ion-col size="6">
-            <ion-label>Data *</ion-label>
-            <ion-input type="date" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.data" name="data" required></ion-input>
-          </ion-col>
-          <ion-col size="6">
-            <ion-label>Qtd Alunos*</ion-label>
-            <ion-input type="number" class="input" fill="outline" min="0" [(ngModel)]="this.aulaService.aula.qtd" name="qtd" required></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-label>Hora De Inicio*</ion-label>
-            <ion-input type="time" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.hora_inicio" name="hora_inicio" required></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-label>Hora De Fim</ion-label>
-            <ion-input type="time" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.hora_fim" name="hora_fim" required></ion-input>
-          </ion-col>
-        </ion-row>
+        <ion-input type="text" class="input" fill="outline" [(ngModel)]="aulaService.aula.professor" name="professor" required></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-label>Data *</ion-label>
+        <ion-input type="date" class="input" fill="outline" [(ngModel)]="aulaService.aula.data" name="data" required></ion-input>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Qtd Alunos*</ion-label>
+        <ion-input type="number" class="input" fill="outline" min="0" [(ngModel)]="aulaService.aula.qtd" name="qtd" required></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Hora De Inicio*</ion-label>
+        <ion-input type="time" class="input" fill="outline" [(ngModel)]="aulaService.aula.hora_inicio" name="hora_inicio" required></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-label>Hora De Fim</ion-label>
+        <ion-input type="time" class="input" fill="outline" [(ngModel)]="aulaService.aula.hora_fim" name="hora_fim" required></ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
         <ion-label>Descriçao Treino:</ion-label>
-        <ion-textarea style="height: 250px;" class="input" fill="outline" [(ngModel)]="this.aulaService.aula.descricao" name="descricao"></ion-textarea>
+        <ion-textarea style="height: 250px;" class="input" fill="outline" [(ngModel)]="aulaService.aula.descricao" name="descricao"></ion-textarea>
       </ion-col>
     </ion-row>
-
-    <!-- <ion-row>
-      <ion-col class="ion-text-center" style="display: flex; justify-content: center;">
-        <ion-button id="open-modal" expand="block" style="height: 50px; border-radius: 5px; width:50%; padding: 10px; color: black;">
-          Selecionar alunos
-        </ion-button>
-      </ion-col>
-    </ion-row>
-
-    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-      <ng-template>
-        <ion-header class="ion-text-center" style="background-color: #4E905C;  margin-top:20px;">
-          <ion-title slot="center">Selecione o(a)s Alunos(as)</ion-title>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <ion-list color="white">
-            <ion-item *ngFor="let aluno of alunos">
-              <ion-label>{{ aluno.nome }}</ion-label>
-              <ion-checkbox [(ngModel)]="aluno.selecionado"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-          <div class="container-button" style="display: flex; justify-content: space-between; margin-top: 20px;">
-            <ion-button (click)="cancel()">Cancelar</ion-button>
-            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
-          </div>
-        </ion-content>
-      </ng-template>
-    </ion-modal> -->
 
     <ion-row class="ion-text-center">
       <ion-col>
-        <ion-button type="submit" class="custom-button">Criar Aula</ion-button>
+        <ion-button type="submit" class="custom-button">
+          Criar Aula
+        </ion-button>
       </ion-col>
     </ion-row>
   </form>

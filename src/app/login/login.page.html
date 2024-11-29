@@ -1,3 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <div class="fundo">
     <div class="login-container">
@@ -14,7 +20,7 @@
         </ion-col>
       </ion-row>
   
-      <form #loginForm="ngForm" (ngSubmit)="realizarLogin(loginForm.value)">
+      <form #loginForm="ngForm" (ngSubmit)="realizarLogin(loginForm)">
         <ion-row> 
           <ion-col>
             <ion-label>E-mail</ion-label>
@@ -39,9 +45,6 @@
           <img class="social-logo"  src="assets/icon/google.png" alt="">
         </ion-col>
       </ion-row>
-  
-      
     </div>
-  
   </div>
-  </ion-content>
+</ion-content>

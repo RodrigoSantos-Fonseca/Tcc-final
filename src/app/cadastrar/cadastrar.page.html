@@ -1,5 +1,5 @@
 <ion-header>
-  <div class="cor  header-container">
+  <div class="cor header-container">
     <ion-back-button class="color:black" defaultHref="/login"></ion-back-button>
     <ion-title style="color: black; text-align: center;">Cadastre-se</ion-title>
   </div>
@@ -10,17 +10,17 @@
     <form #criarContaForm="ngForm" (ngSubmit)="criarConta(criarContaForm.value)">
       <ion-row>
         <ion-col>
-          <ion-input position="floating" label="Nome" name="nome" ngModel type="text" required></ion-input>
+          <ion-input position="floating" label="Nome" name="nome" ngModel [(ngModel)]="this.user.nome" type="text" required></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
-          <ion-input position="floating" label="Data de Nascimento" name="dataNascimento" ngModel type="date" required></ion-input>
+          <ion-input position="floating" label="Data de Nascimento" name="data_nascimento" ngModel [(ngModel)]="this.user.data_nascimento" type="date" required></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
-          <ion-select position="floating" label="Sexo" name="dn" ngModel required>
+          <ion-select position="floating" label="Sexo" name="sexo" ngModel [(ngModel)]="this.user.sexo" required>
             <ion-select-option value="masculino">Masculino</ion-select-option>
             <ion-select-option value="feminino">Feminino</ion-select-option>
           </ion-select>
@@ -28,7 +28,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-input position="floating" label="E-mail" name="email" ngModel type="text" required></ion-input>
+          <ion-input position="floating" label="E-mail" name="email" ngModel [(ngModel)]="this.user.email" type="text" required></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -39,39 +39,4 @@
       <ion-button color="danger" slot="start" type="submit">Cadastrar</ion-button>
     </form>
   </div>
-
-  <!-- <div class="container">
-    <form #criarContaForm="ngForm" (ngSubmit)="criarConta(criarContaForm.value)">
-      <ion-row>
-        <ion-col>
-          <ion-input position="floating" label="Nome" name="nome" [(ngModel)]="user.name" type="text" required></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-input position="floating" label="Data de Nascimento" name="dataNascimento" [(ngModel)]="user.dn" type="date" required></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-select position="floating" label="Sexo" name="dn" [(ngModel)]="user.sexo" required>
-            <ion-select-option value="masculino">Masculino</ion-select-option>
-            <ion-select-option value="feminino">Feminino</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-input position="floating" label="E-mail" name="email" [(ngModel)]="user.email" type="text" required></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-input position="floating" label="Senha" name="password" [(ngModel)]="user.password" type="password" required></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-button color="danger" slot="start" type="submit">Cadastrar</ion-button>
-    </form>
-  </div> -->
-
 </ion-content>
