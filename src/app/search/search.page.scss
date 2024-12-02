@@ -1,0 +1,78 @@
+*{
+    color: black;
+}
+  
+  .alinhamento{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .adicionar{
+    margin: 5px;
+    border-radius: 5px;
+    height: 150px;
+    width: auto ;
+    background-color: #4E905C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .adicionar img{
+    height:  50%;
+  }
+  
+  
+  ion-fab {
+    margin-bottom: 10%; /* Ajuste a margem para posicionar o ícone */
+  }
+  
+  
+  .cor-body{
+    background-color: white;
+  }
+  
+  
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-div {
+    display: flex;
+    align-items: stretch; /* Faz com que o aside e o container de atividades tenham a mesma altura */
+    margin-bottom: 20px; /* Espaço entre os grupos de atividades */
+    gap:5px;
+  }
+  
+  .side-div {
+    width: 150px; /* Largura fixa para o aside */
+    background-color: #f0f0f0; /* Para visualização, pode ajustar conforme necessário */
+    padding: 10px; /* Espaçamento interno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border-radius: 5px;
+  }
+  
+  .atividade-container {
+    flex: 1; /* Ocupa o restante do espaço disponível */
+  }
+  
+  .atividade-div {
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    color: black; 
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .atividade-div:last-child {
+    margin-bottom: 0;
+  }
+
+  

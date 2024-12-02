@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { IonModal } from '@ionic/angular';
+import { AuthenticateService } from 'src/app/services/auth.service';
+import { AuthPasswordResetService } from 'src/app/shared/service/auth-password-reset.service';
+import { Router } from '@angular/router';
+import { MessageService } from 'src/app/services/message.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +14,16 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService: AuthenticateService, private router: Router) { }
+  @ViewChild(IonModal) modal!: IonModal;
+  isModalOpen = false;
+  resetEmail = '';
+
+  constructor(
+    private authService: AuthenticateService,
+    private authPasswordResetService: AuthPasswordResetService,
+    private router: Router,
+    private messageService: MessageService
+  ) { }
 
   async ngOnInit() {
     const user = await this.authService.getUser();
@@ -23,16 +36,46 @@ export class LoginPage implements OnInit {
     if (form.valid) {
       const email = form.value.email;
       const password = form.value.password;
-      console.log('Tentando fazer login com:', email);
+      this.messageService.show('Tentando fazer login com: ' + email);
       const success = await this.authService.login(email, password);
       if (success) {
-        console.log('Login bem-sucedido!');
+        this.messageService.show('Login bem-sucedido!');
         this.router.navigate(['/home']);
       } else {
-        console.log('Falha ao fazer login.');
+        this.messageService.show('Falha ao fazer login.');
       }
     } else {
-      console.log('Formulário inválido:', form);
+      this.messageService.show('Formulário inválido.');
     }
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  onWillDismiss(event: Event) {
+    this.isModalOpen = false;
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  async resetPassword() {
+    if (this.isValidEmail(this.resetEmail)) {
+      try {
+        await this.authPasswordResetService.sendPasswordResetEmail(this.resetEmail);
+        this.messageService.show('Password reset email sent successfully.');
+      } catch (error: any) {
+        this.messageService.show('Error sending password reset email: ' + error.message);
+      }
+    } else {
+      this.messageService.show('Invalid email address.');
+    }
+  }
+
+  isValidEmail(email: string): boolean {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return re.test(email);
   }
 }
