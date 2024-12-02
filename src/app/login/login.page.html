@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <div class="fundo">
     <div class="login-container">
@@ -12,23 +6,48 @@
           <img src="assets/icon/logo.png" alt="" class="logo">
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col class="ion-text-center">
           <h3>Login</h3>
-          <p>Novo por aqui?<a style=" margin-left:1px; text-decoration:none; color:#ECFEBF" routerLink="/cadastrar">Registre-se</a></p>
+          <p>Novo por aqui?
+            <a style="margin-left:1px; text-decoration:none; color:#ECFEBF" routerLink="/cadastrar">Registre-se</a>
+          </p>
         </ion-col>
       </ion-row>
-  
+
       <form #loginForm="ngForm" (ngSubmit)="realizarLogin(loginForm)">
-        <ion-row> 
+        <ion-row>
           <ion-col>
             <ion-label>E-mail</ion-label>
             <ion-input ngModel name="email" class="input-login" fill="outline"></ion-input>
             <br />
             <ion-label>Senha</ion-label>
             <ion-input ngModel name="password" type="password" class="input-login" fill="outline"></ion-input>
-            <ion-label>esqueceu a senha?</ion-label>
+            <ion-label id="open-modal" (click)="openModal()" style="cursor: pointer; color: inherit; text-decoration: none;">Esqueceu a senha?</ion-label>
+            <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+              <ng-template>
+                <ion-header>
+                  <ion-toolbar>
+                    <ion-buttons slot="start">
+                      <ion-button (click)="cancel()">Cancel</ion-button>
+                    </ion-buttons>
+                    <ion-title class="text-white redefinir">Redefinir Senha</ion-title>
+                  </ion-toolbar>
+                </ion-header>
+                <ion-content class="ion-padding dark-modal-content">
+                  <ion-item>
+                    <ion-col>
+                      <ion-label class="text-white redefinir">Email</ion-label>
+                      <ion-input type="email" [(ngModel)]="resetEmail" name="resetEmail"></ion-input>
+                    </ion-col>
+                  </ion-item>
+                  <br>
+                  <ion-button expand="block" (click)="resetPassword()">Enviar</ion-button>
+                </ion-content>
+              </ng-template>
+            </ion-modal>
+
             <ion-row class="ion-text-center">
               <ion-col>
                 <button type="submit" class="custom-button">Login</button>
@@ -37,14 +56,6 @@
           </ion-col>
         </ion-row>
       </form>
-  
-      <ion-row class="ion-text-center  logo-row">
-        <ion-col>
-          <img class="social-logo" src="assets/icon/facebook.png" alt="">
-          <!-- <img class="social-logo" (click)="entrarComGoogle()" src="assets/icon/google.png" alt=""> -->
-          <img class="social-logo"  src="assets/icon/google.png" alt="">
-        </ion-col>
-      </ion-row>
     </div>
   </div>
 </ion-content>

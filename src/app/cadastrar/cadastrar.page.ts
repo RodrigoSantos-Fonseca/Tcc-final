@@ -51,7 +51,6 @@ export class CadastrarPage implements OnInit {
         email: dados.email
       });
       console.log('Dados do usuário salvos com sucesso!');
-      await this.showToast('Cadastrado com sucesso!', 'middle');
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Erro ao salvar os dados do usuário: ', error);

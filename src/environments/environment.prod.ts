@@ -1,6 +1,6 @@
 export const environment = {
   firebaseConfig: {
-    apiKey: "AIzaSyCsnH-wR9KF60XkKpOycwQbo0a5gD71ZMI",
+    aapiKey: "AIzaSyCsnH-wR9KF60XkKpOycwQbo0a5gD71ZMI",
     authDomain: "gkstudio-4d735.firebaseapp.com",
     projectId: "gkstudio-4d735",
     storageBucket: "gkstudio-4d735.firebasestorage.app",

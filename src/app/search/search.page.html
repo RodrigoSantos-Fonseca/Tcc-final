@@ -1,12 +1,17 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
+  <ion-input 
+    type="text" 
+    class="input" 
+    fill="outline" 
+    name="search" 
+    placeholder="Pesquisar aula" 
+    required 
+    (ionInput)="pesquisarAula($event)">
+  </ion-input>
 
-  <div class="titulo-atividade" style="margin: 10px 0px; text-align: center;">
-    <h1>Atividades</h1>
-  </div>
-
-  <div class="container" *ngFor="let aula of aulaService.aulas">
+  <div class="container" *ngFor="let aula of aulasFiltradas">
     <div class="main-div">
       <aside class="side-div">
         <span>{{ aula.data | slice:8:10 }}/{{ aula.data | slice:5:7 }}/{{ aula.data | slice:0:4 }}</span>
@@ -40,7 +45,6 @@
       </div>
     </div>
   </div>
-
 </ion-content>
 
 <app-tabs></app-tabs>
