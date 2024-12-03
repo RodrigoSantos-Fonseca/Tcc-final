@@ -2,23 +2,23 @@
   <ion-toolbar>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-    <ion-tab-button routerLink="/home">
-      <ion-icon name="home"></ion-icon>
-      Home
-    </ion-tab-button>
-    <ion-tab-button routerLink="/criar-aula">
-      <ion-icon name="add"></ion-icon>
-      Criar aula
-    </ion-tab-button>
-    <ion-tab-button routerLink="/perfil">
-      <ion-icon name="person"></ion-icon>
-     Perfil
-    </ion-tab-button>
-    <ion-tab-button routerLink="/search">
-      <ion-icon name="search"></ion-icon>
-      Search
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-</ion-toolbar>
+        <ion-tab-button routerLink="/home">
+          <ion-icon name="home"></ion-icon>
+          Home
+        </ion-tab-button>
+        <ion-tab-button *ngIf="isAdmin" routerLink="/criar-aula">
+          <ion-icon name="add"></ion-icon>
+          Criar aula
+        </ion-tab-button>
+        <ion-tab-button routerLink="/perfil">
+          <ion-icon name="person"></ion-icon>
+          Perfil
+        </ion-tab-button>
+        <ion-tab-button routerLink="/search">
+          <ion-icon name="search"></ion-icon>
+          Search
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
 </ion-footer>
