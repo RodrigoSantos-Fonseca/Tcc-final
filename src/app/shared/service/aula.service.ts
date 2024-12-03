@@ -22,7 +22,7 @@ export class AulaService {
     descricao: null,
     confirmados: 0,
     aluno: [],
-    id_confirmados: [] // Usaremos este campo para armazenar os IDs dos usuários confirmados
+    id_confirmados: []
   };
 
   aulas: any = [];
@@ -76,6 +76,16 @@ export class AulaService {
       await this.crudService.update(aula.id, aula, 'aulas');
       this.aulaSubject.next();
     }
+  }
+
+  async updateAula(id: string, data: any) {
+    await this.crudService.update(id, data, 'aulas');
+    this.aulaSubject.next();
+  }
+
+  async apagarAula(id: string) {
+    await this.crudService.delete(id, 'aulas');
+    this.aulaSubject.next();
   }
 
   getAulaSubject() {

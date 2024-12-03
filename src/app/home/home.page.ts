@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AulaService } from '../shared/service/aula.service';
 import { AuthenticateService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +17,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   constructor(
     public aulaService: AulaService,
-    public authService: AuthenticateService
+    public authService: AuthenticateService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -34,6 +36,7 @@ export class HomePage implements OnInit, OnDestroy {
         this.userId = user ? user.id : null;
       } else {
         this.userId = null;
+        await this.carregarAulas(); // Certifique-se de recarregar aulas se não estiver logado
       }
     });
 
@@ -43,6 +46,10 @@ export class HomePage implements OnInit, OnDestroy {
   async carregarAulas() {
     await this.aulaService.getAulas();
     this.aulas = this.aulaService.aulas;
+  }
+
+  goToAulaDescricao(aulaId: string) {
+    this.router.navigate(['/aula-descricao', aulaId], { queryParams: { origem: 'home' } }); // Navegação com o parâmetro de origem
   }
 
   isParticipating(aula: any): boolean {
