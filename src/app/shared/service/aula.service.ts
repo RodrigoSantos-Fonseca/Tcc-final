@@ -22,7 +22,7 @@ export class AulaService {
     descricao: null,
     confirmados: 0,
     aluno: [],
-    id_confirmados: []
+    id_confirmados: [] // Usaremos este campo para armazenar os IDs dos usuários confirmados
   };
 
   aulas: any = [];
@@ -42,16 +42,16 @@ export class AulaService {
     });
   }
 
-  getAulas() {
-    this.crudService.fetchAll('aulas').then(resp => {
-      this.aulas = resp;
-      this.aulas.forEach((aula: any) => {
-        if (!aula.id_confirmados) {
-          aula.id_confirmados = [];
-        }
-      });
-      this.aulas.sort((a: any, b: any) => new Date(a.data).getTime() - new Date(b.data).getTime());
+  async getAulas() {
+    const resp = await this.crudService.fetchAll('aulas');
+    this.aulas = resp;
+    this.aulas.forEach((aula: any) => {
+      if (!aula.id_confirmados) {
+        aula.id_confirmados = [];
+      }
     });
+    this.aulas.sort((a: any, b: any) => new Date(a.data).getTime() - new Date(b.data).getTime());
+    this.aulaSubject.next();
   }
 
   async confirmarPresenca(aula: any) {
@@ -73,7 +73,8 @@ export class AulaService {
         aula.confirmados += 1;
         aula.id_confirmados.push(userId);
       }
-      this.crudService.update(aula.id, aula, 'aulas');
+      await this.crudService.update(aula.id, aula, 'aulas');
+      this.aulaSubject.next();
     }
   }
 
