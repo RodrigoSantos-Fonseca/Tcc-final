@@ -18,7 +18,8 @@ export class CadastrarPage implements OnInit {
     nome: null,
     data_nascimento: null,
     sexo: null,
-    email: null
+    email: null,
+    admin: false // Adicione este campo para inicializar o admin como falso
   };
 
   constructor(
@@ -36,20 +37,23 @@ export class CadastrarPage implements OnInit {
     const userCredential: UserCredential | null = await this._authenticate.register(dados.email, dados.password);
     if (userCredential) {
       console.log('Usuário registrado com UID:', userCredential.user.uid);
-      await this.salvarDadosUsuario(dados, userCredential.user.uid);
+      // Verifique se a senha é "personalgk" e defina admin como true
+      const userData = {
+        id: userCredential.user.uid,
+        nome: dados.nome,
+        data_nascimento: dados.data_nascimento,
+        sexo: dados.sexo,
+        email: dados.email,
+        admin: dados.password === 'personalgk' // Define admin como true se a senha for "personalgk"
+      };
+      await this.salvarDadosUsuario(userData, userCredential.user.uid);
     }
   }
 
   async salvarDadosUsuario(dados: any, userId: string) {
     try {
       const userRef = doc(this.firestore, `users/${userId}`);
-      await setDoc(userRef, {
-        id: userId,
-        nome: dados.nome,
-        data_nascimento: dados.data_nascimento,
-        sexo: dados.sexo,
-        email: dados.email
-      });
+      await setDoc(userRef, dados);
       console.log('Dados do usuário salvos com sucesso!');
       this.router.navigate(['/login']);
     } catch (error) {

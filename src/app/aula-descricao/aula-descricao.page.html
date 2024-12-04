@@ -1,0 +1,106 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" *ngIf="aula">
+
+  <div class="titulo">
+    <ion-item>
+      <h1>{{ aula.nome }}</h1>
+    </ion-item>
+  </div>
+
+  <div class="perfil">
+    <ion-avatar slot="start">
+      <img src="assets/icon/mario.jpeg" alt="Foto de Perfil">
+    </ion-avatar>
+    <h3>Professor: {{ aula.professor }}</h3>
+  </div>
+
+  <div class="atividade">
+    <ion-item>
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>Data</ion-label>
+      <ion-label class="desc">{{ aula.data | date:'dd/MM/yyyy' }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-label>Horário:</ion-label>
+      <ion-label class="desc">{{ aula.hora_inicio }} - {{ aula.hora_fim }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="people-outline" slot="start"></ion-icon>
+      <ion-label>Capacidade:</ion-label>
+      <ion-label class="desc">{{ aula.confirmados }} / {{ aula.qtd }}</ion-label>
+    </ion-item>
+  </div>
+
+  <div class="descricao">
+    <h2>Detalhes de Aula</h2>
+    <p>{{ aula.descricao }}</p>
+  </div>
+
+  <div class="opcoes" *ngIf="isAdmin">
+    <ion-button expand="full" color="primary" (click)="abrirModal()">Editar</ion-button>
+    <ion-button expand="full" color="danger" (click)="apagarAula()">Apagar</ion-button>
+  </div>
+
+  <div class="opcoes" *ngIf="!isAdmin">
+    <ion-button
+      expand="full"
+      [ngStyle]="getButtonStyle()"
+      [disabled]="isButtonDisabled()"
+      (click)="confirmarPresenca()">
+      {{ getButtonLabel() }}
+    </ion-button>
+  </div>
+
+  <ion-button expand="full" color="medium" (click)="voltar()">Voltar</ion-button>
+
+</ion-content>
+
+<!-- Modal para edição -->
+<ion-modal *ngIf="showEditModal">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Editar Aula</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="fecharModal()">Fechar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <form #form="ngForm" (ngSubmit)="salvarEdicao(form)">
+      <ion-item>
+        <ion-label position="floating">Nome Aula</ion-label>
+        <ion-input type="text" [(ngModel)]="aula.nome" name="nome" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Professor</ion-label>
+        <ion-input type="text" [(ngModel)]="aula.professor" name="professor" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Data</ion-label>
+        <ion-input type="date" [(ngModel)]="aula.data" name="data" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Hora de Início</ion-label>
+        <ion-input type="time" [(ngModel)]="aula.hora_inicio" name="hora_inicio" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Hora de Fim</ion-label>
+        <ion-input type="time" [(ngModel)]="aula.hora_fim" name="hora_fim" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Capacidade</ion-label>
+        <ion-input type="number" [(ngModel)]="aula.qtd" name="qtd" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descrição</ion-label>
+        <ion-textarea [(ngModel)]="aula.descricao" name="descricao"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" type="submit" color>Salvar</ion-button>
+    </form>
+  </ion-content>
+</ion-modal>
+
+<app-tabs></app-tabs>

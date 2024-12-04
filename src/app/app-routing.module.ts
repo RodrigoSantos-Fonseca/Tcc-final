@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,35 +13,39 @@ const routes: Routes = [
   },
   {
     path: 'criar-aula',
-    loadChildren: () => import('./criar-aula/criar-aula.module').then( m => m.CriarAulaPageModule)
+    loadChildren: () => import('./criar-aula/criar-aula.module').then(m => m.CriarAulaPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'loading',
-    loadChildren: () => import('./loading/loading.module').then( m => m.LoadingPageModule)
+    loadChildren: () => import('./loading/loading.module').then(m => m.LoadingPageModule)
   },
   {
     path: 'cadastrar',
-    loadChildren: () => import('./cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
+    loadChildren: () => import('./cadastrar/cadastrar.module').then(m => m.CadastrarPageModule)
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
   },
   {
     path: 'dados-pessoais',
-    loadChildren: () => import('./dados-pessoais/dados-pessoais.module').then( m => m.DadosPessoaisPageModule)
+    loadChildren: () => import('./dados-pessoais/dados-pessoais.module').then(m => m.DadosPessoaisPageModule)
   },
   {
     path: 'alterar-senha',
-    loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
+    loadChildren: () => import('./alterar-senha/alterar-senha.module').then(m => m.AlterarSenhaPageModule)
   },
   {
     path: 'search',
-    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+    loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
+  },
+  {
+    path: 'aula-descricao/:id',
+    loadChildren: () => import('./aula-descricao/aula-descricao.module').then(m => m.AulaDescricaoPageModule)
   }
 ];
 

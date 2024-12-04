@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, UserCredential } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class AuthenticateService {
   message: string = 'Erro inesperado';
   isLoading = false;
   private user: any = null;
+  private userStatusSubject = new BehaviorSubject<boolean>(false);
 
   constructor(
     public auth: Auth,
@@ -23,13 +25,19 @@ export class AuthenticateService {
       if (user) {
         console.log('Usuário autenticado:', user);
         await this.getUserData(user.uid);
-        localStorage.setItem('userId', user.uid); // Salva o ID do usuário no localStorage
+        localStorage.setItem('userId', user.uid);
+        this.userStatusSubject.next(true);
       } else {
         console.log('Nenhum usuário autenticado');
         this.user = null;
-        localStorage.removeItem('userId'); // Remove o ID do usuário do localStorage
+        localStorage.removeItem('userId');
+        this.userStatusSubject.next(false);
       }
     });
+  }
+
+  getUserStatus() {
+    return this.userStatusSubject.asObservable();
   }
 
   private async getUserData(uid: string) {
@@ -37,7 +45,7 @@ export class AuthenticateService {
     const userSnap = await getDoc(userDoc);
     if (userSnap.exists()) {
       this.user = userSnap.data();
-      this.user.id = uid; // Inclui o UID do usuário
+      this.user.id = uid;
       console.log('Dados do usuário:', this.user);
     } else {
       console.error('Documento do usuário não encontrado');
@@ -46,7 +54,7 @@ export class AuthenticateService {
 
   async getUser() {
     if (!this.user) {
-      const userId = localStorage.getItem('userId'); // Busca o ID do usuário no localStorage
+      const userId = localStorage.getItem('userId');
       if (userId) {
         await this.getUserData(userId);
       }
@@ -64,10 +72,10 @@ export class AuthenticateService {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       this._message.show('Conta criada com sucesso! Realize o Login!!!');
       this.redirectTo('/login');
-      return userCredential; // Retorna o userCredential completo
+      return userCredential;
     } catch (error) {
       this.showErro(error, email, password);
-      return null; // Retorna null em caso de falha
+      return null;
     } finally {
       this.isLoading = false;
     }
@@ -78,7 +86,8 @@ export class AuthenticateService {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       this._message.show('Login Realizado com Sucesso!');
-      localStorage.setItem('userId', userCredential.user.uid); // Salva o ID do usuário no localStorage ao logar
+      localStorage.setItem('userId', userCredential.user.uid);
+      this.userStatusSubject.next(true);
       this.redirectTo('/home');
       return true;
     } catch (error) {
@@ -93,6 +102,7 @@ export class AuthenticateService {
     try {
       await signOut(this.auth);
       localStorage.removeItem('userId');
+      this.userStatusSubject.next(false);
       this._router.navigate(['/login']);
     } catch (error) {
       console.error('Erro ao sair: ', error);
